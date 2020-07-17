@@ -142,13 +142,13 @@ function parseAndReturnDB()
   var rawValue = "";
   var objectValue = {};
   var sheetsJson = []; 
-  for(var i=0; i < sheets.length; i++)
+  for(var l=0; l < sheets.length; l++)
   {
-    var range = sheets[i].getDataRange();
+    var range = sheets[l].getDataRange();
     var values = range.getValues();
     var rows = range.getNumRows();
     var columns = range.getNumColumns();
-    var sheetName = sheets[i].getName();
+    var sheetName = sheets[l].getName();
     var inTable = false;
     var inHeader = false;
     var nameCurrentTable = ""
@@ -334,15 +334,34 @@ function parseAndReturnDB()
 
 function exportToCDB()
 {
-  var content = parseAndReturnDB();
-  var fileName = SpreadsheetApp.getActive().getName()  + ".cdb";
+  var content = "";
+  var fileName = "";
+  try
+  {
+    content = parseAndReturnDB();
+    fileName = SpreadsheetApp.getActive().getName()  + ".cdb";
 
-  var file = DriveApp.createFile(fileName, content);
-  var fileID = file.getId();
-  var fileName = file.getName();
-  var html = HtmlService.createHtmlOutput('<html><body><a href="'+file.getDownloadUrl()+'" target="blank" onclick="google.script.host.close()">'+"Click right Save As"+'</a></body></html>')
-  SpreadsheetApp.getUi().showModalDialog(html, 'Download');
+  }
+  catch(e)
+  {
+    var html = HtmlService.createHtmlOutput('<html><body>Error parsing sheet : '+e+'</body></html>')
+    SpreadsheetApp.getUi().showModalDialog(html, 'Download');
+  }
+  try
+  {
+    var file = DriveApp.createFile(fileName, content);
+    var fileID = file.getId();
+    var fileName = file.getName();
+    var html = HtmlService.createHtmlOutput('<html><body><a href="'+file.getDownloadUrl()+'" target="blank" onclick="google.script.host.close()">'+"Click right Save As"+'</a></body></html>')
+    SpreadsheetApp.getUi().showModalDialog(html, 'Download');
+  }
+  catch(e)
+  {
+    var html = HtmlService.createHtmlOutput('<html><body> error : '+e+' <br> content of sheet<br><br><br>'+content+'</body></html>')
+    SpreadsheetApp.getUi().showModalDialog(html, 'Download');
+  }
 }
+
 
 function onOpen(e)
 {
