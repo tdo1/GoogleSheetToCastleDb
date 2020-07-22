@@ -1,5 +1,5 @@
 # GoogleSheetToCastleDb
-google script to export google Sheet To castleDb
+google script to export google Sheet To castleDb, it can be use after in godot and this plugin https://github.com/thejustinwalsh/castledb-godot
 
 use !!!NameOfSheet for declare beginning of the db sheet
 use !!end for declare the end of the dbSheet
