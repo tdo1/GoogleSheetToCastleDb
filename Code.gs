@@ -349,10 +349,16 @@ function exportToCDB()
   }
   try
   {
-    var file = DriveApp.createFile(fileName, content);
-    var fileID = file.getId();
-    var fileName = file.getName();
-    var html = HtmlService.createHtmlOutput('<html><body><a href="'+file.getDownloadUrl()+'" target="blank" onclick="google.script.host.close()">'+"Click right Save As"+'</a></body></html>')
+    var resource = {
+      title: fileName,
+      mimeType: MimeType.PLAIN_TEXT
+    };  
+    var blob =  Utilities.newBlob("");
+    blob.setDataFromString(content);
+    var file = Drive.Files.insert(resource, blob);
+    var downloadLink = "https://drive.google.com/uc?export=download&id="+file.getId();
+    
+    var html = HtmlService.createHtmlOutput('<html><body><a href="'+downloadLink+'" target="blank" onclick="google.script.host.close()">'+"Click right Save As"+'</a><br>Content : <br><br>'+content+'</body></html>')
     SpreadsheetApp.getUi().showModalDialog(html, 'Download');
   }
   catch(e)
