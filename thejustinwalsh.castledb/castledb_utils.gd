@@ -165,7 +165,6 @@ static func gen_column_data(path:String, name:String, columns:Array, lines:Array
 							code += "Vector3(%s)" % line[param]
 						CDB_LIST:
 							code += "[%s]" % line[param]
-							print(code)
 						_:
 							code += "\"%s\"" % line[param]
 			code += ")"
