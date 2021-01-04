@@ -17,6 +17,11 @@ $color
 $file
 $tile
 $nil
+$list example : "test",43.3,4
+$vector3  example : 44.5,53.2,33.2
+$vector2 example : 44.5,53.2
+
+
 
 the name of your file will be the name of the googleeSheet.cdb
 
@@ -100,6 +105,18 @@ result :
 				{
 					"typeStr": "1",
 					"name": "image"
+				},
+				{
+					"typeStr": "15",
+					"name": "listTest"
+				},
+				{
+					"typeStr": "16",
+					"name": "vector2Test"
+				},
+				{
+					"typeStr": "17",
+					"name": "vector3Test"
 				}
 			],
 			"lines": [
@@ -108,21 +125,30 @@ result :
 					"name": "weapon number one",
 					"damage": 10.1,
 					"energyRequired": 10,
-					"image": "../art/engine/engine1.png"
+					"image": "../art/engine/engine1.png",
+					"listTest": "\"Human\",0.8",
+					"vector2Test": "47,49",
+					"vector3Test": "47,49,33"
 				},
 				{
 					"ID": "W2",
 					"name": "weapon two",
 					"damage": 11.3,
 					"energyRequired": 12,
-					"image": "../art/engine/engine1.png"
+					"image": "../art/engine/engine1.png",
+					"listTest": "\"Human\",0.8",
+					"vector2Test": "47,49",
+					"vector3Test": "47,49,33"
 				},
 				{
 					"ID": "W3",
 					"name": "weapon three",
 					"damage": 13.4,
 					"energyRequired": 14,
-					"image": "../art/engine/engine1.png"
+					"image": "../art/engine/engine1.png",
+					"listTest": "\"Human\",0.8",
+					"vector2Test": "47,49",
+					"vector3Test": "47,49,33"
 				}
 			],
 			"separators": [],
