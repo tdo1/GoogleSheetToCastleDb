@@ -211,24 +211,31 @@ function parseAndReturnDB()
               var headersObj = {};
               
               /*
-              	"0":
-                return CDB_ID
-                "1":
-                return CDB_STRING
-                "2":
-                return CDB_BOOL
-                "3":
-                return CDB_INT
-                "4":
-                return CDB_FLOAT
-                "11":
-                return CDB_COLOR
-                "13":
-                return CDB_FILE
-                "14":
-                return CDB_TILE
-                _:
-              return CDB_NIL
+		"0":
+			return CDB_ID
+		"1":
+			return CDB_STRING
+		"2":
+			return CDB_BOOL
+		"3":
+			return CDB_INT
+		"4":
+			return CDB_FLOAT
+		"11":
+			return CDB_COLOR
+		"13":
+			return CDB_FILE
+		"14":
+			return CDB_TILE
+		"15":
+			return CDB_VECTOR2
+		"16":
+			return CDB_VECTOR3
+		"17":
+			return CDB_LIST
+		_:
+			return CDB_NIL
+            
               */
               var test = values[i-2];
               var headerForceType = values[i-2][headersColIndex[k]];
@@ -265,6 +272,18 @@ function parseAndReturnDB()
                 else if(headerForceType == "$tile")
                 {
                   typeIntStr = "14";
+                }
+                else if(headerForceType == "$vector2")
+                {
+                  typeIntStr = "15";
+                }
+                else if(headerForceType == "$vector3")
+                {
+                  typeIntStr = "16";
+                }
+                else if(headerForceType == "$list")
+                {
+                  typeIntStr = "17";
                 }
                 else if(headerForceType == "$nil")
                 {
@@ -356,6 +375,9 @@ function exportToCDB()
     var blob =  Utilities.newBlob("");
     blob.setDataFromString(content);
     var file = Drive.Files.insert(resource, blob);
+   // var file = DriveApp.createFile(fileName, content);
+   // var fileID = file.getId();
+    //var fileName = file.getName();
     var downloadLink = "https://drive.google.com/uc?export=download&id="+file.getId();
     
     var html = HtmlService.createHtmlOutput('<html><body><a href="'+downloadLink+'" target="blank" onclick="google.script.host.close()">'+"Click right Save As"+'</a><br>Content : <br><br>'+content+'</body></html>')
@@ -376,4 +398,3 @@ function onOpen(e)
   .addItem("ExportToCDB", "exportToCDB")
   .addToUi();
 }
-  
