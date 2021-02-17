@@ -233,6 +233,8 @@ function parseAndReturnDB()
 			return CDB_VECTOR3
 		"17":
 			return CDB_LIST
+    "18":
+			return CDB_DICT
 		_:
 			return CDB_NIL
             
@@ -284,6 +286,10 @@ function parseAndReturnDB()
                 else if(headerForceType == "$list")
                 {
                   typeIntStr = "17";
+                }
+                else if(headerForceType == "$dict")
+                {
+                  typeIntStr = "18";
                 }
                 else if(headerForceType == "$nil")
                 {
@@ -398,3 +404,4 @@ function onOpen(e)
   .addItem("ExportToCDB", "exportToCDB")
   .addToUi();
 }
+  
